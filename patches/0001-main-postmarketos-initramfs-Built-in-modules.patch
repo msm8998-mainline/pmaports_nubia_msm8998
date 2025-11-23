@@ -1,0 +1,45 @@
+From 1509aa16e73be9f364325a216a6d7dd28cb9f614 Mon Sep 17 00:00:00 2001
+From: Giovanni Ricca <giovanniricca@proton.me>
+Date: Mon, 24 Nov 2025 17:20:59 +0100
+Subject: [PATCH 1/2] main/postmarketos-initramfs: Built-in modules
+
+Change-Id: Ib95b92b5751b884e5373bf7436764782124413b8
+Signed-off-by: Giovanni Ricca <giovanniricca@proton.me>
+---
+ main/postmarketos-initramfs/APKBUILD | 6 ------
+ 1 file changed, 6 deletions(-)
+
+diff --git a/main/postmarketos-initramfs/APKBUILD b/main/postmarketos-initramfs/APKBUILD
+index 61d6d1ca5a..d7c2a37f26 100644
+--- a/main/postmarketos-initramfs/APKBUILD
++++ b/main/postmarketos-initramfs/APKBUILD
+@@ -42,7 +42,6 @@ makedepends="
+ 	postmarketos-base-nofde
+ "
+ source="
+-	00-default.modules
+ 	00-initramfs-base.dirs
+ 	00-initramfs-base.files
+ 	00-initramfs-extra-base.files
+@@ -88,10 +87,6 @@ package() {
+ 		-t "$pkgdir"/usr/share/mkinitfs/dirs/
+ 	mkdir -p "$pkgdir"/etc/mkinitfs/dirs
+ 
+-	install -Dm644 "$srcdir"/00-default.modules \
+-		-t "$pkgdir"/usr/share/mkinitfs/modules/
+-	mkdir -p "$pkgdir"/etc/mkinitfs/modules
+-
+ 	install -Dm644 "$srcdir"/00-initramfs-base.files \
+ 		-t "$pkgdir"/usr/share/mkinitfs/files/
+ 	mkdir -p "$pkgdir"/etc/mkinitfs/files
+@@ -107,7 +102,6 @@ package() {
+ }
+ 
+ sha512sums="
+-4f32746781d6c73c3e97def5ad127633827ce0e4cf87824b212b58d897e21cfefb391f6cdffcf4b40378c488c64a6b8559973996bba8a9cbb6a1e5db9ba33c80  00-default.modules
+ 9c0e8f6f61d5da191e03a1aa9d5d0ceb5baf1eae6dbb9bfb0af59817783525119ac8394b135f303f7b6434a3eab0b49185fb90379e06823db847a4999c75ce33  00-initramfs-base.dirs
+ e268094cbd25e063fdab2226f8cf93885bd8b90455991a53296231a3401a03669440333025ca44b2a8459df98787a5725f7b227ccb9750f8fcad17ef58ba21a1  00-initramfs-base.files
+ d0f35562365756d93066ce45924d17fb347b54095179c3262daa2f073e12743505cd5d9372ad30485915ca754d95a8edba9a74314e7949e0b3cf6978a87d03a5  00-initramfs-extra-base.files
+-- 
+2.52.0
+

@@ -1,0 +1,61 @@
+# Maintainer: Giovanni Ricca <giovanniricca@proton.me>
+# Stable Linux kernel with patches for MSM8998 devices
+_flavor="nubia-msm8998"
+pkgname=linux-$_flavor
+pkgver=6.1
+pkgrel=0
+_commit="5fd88d802408f8d7012354089144bb62d70eac67"
+pkgdesc="Mainline Kernel fork for Nubia MSM8998 devices"
+arch="aarch64"
+_carch="arm64"
+_defconfig="msm8998_defconfig"
+url="https://github.com/msm8998-mainline/linux"
+license="GPL-2.0-only"
+options="!strip !check !tracedeps
+	pmb:cross-native
+"
+makedepends="
+	bash
+	bison
+	findutils
+	flex
+	linux-headers
+	openssl-dev
+	perl
+	postmarketos-installkernel
+	xz
+"
+
+# Source
+source="
+	$url/archive/$_commit/linux-$_commit.tar.gz
+"
+builddir="$srcdir/linux-$_commit"
+
+prepare() {
+	default_prepare
+	make ARCH="$_carch" $_defconfig
+}
+
+build() {
+	unset LDFLAGS
+	# V=1: workaround for pma#1990, remove after upgrading to >= 6.2
+	make ARCH="$_carch" CC="${CC:-gcc}" \
+		KBUILD_BUILD_VERSION="$((pkgrel + 1))-$_flavor" V=1
+}
+
+package() {
+	mkdir -p "$pkgdir"/boot
+
+	make zinstall dtbs_install \
+		ARCH="$_carch" \
+		INSTALL_PATH="$pkgdir"/boot \
+		INSTALL_DTBS_PATH="$pkgdir"/boot/dtbs
+
+	install -D "$builddir"/include/config/kernel.release \
+		"$pkgdir"/usr/share/kernel/$_flavor/kernel.release
+}
+
+sha512sums="
+76ead62dde400774e74ffbc2dfabc39807244f80ce2d94f22548142de277979782df746926e8c56b8aaac978a3bbb2a4c9c8ad6e0c324b3f9133f715b2fc0f8f  linux-5fd88d802408f8d7012354089144bb62d70eac67.tar.gz
+"

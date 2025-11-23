@@ -1,0 +1,48 @@
+# Reference: <https://postmarketos.org/devicepkg>
+maintainer="Giovanni Ricca <giovanniricca@proton.me>"
+pkgname=device-nubia-nx595j
+pkgdesc="Nubia Z17s"
+pkgver=1
+pkgrel=0
+url="https://postmarketos.org"
+license="MIT"
+arch="aarch64"
+options="!check !archcheck"
+depends="
+	mkbootimg
+	postmarketos-base
+"
+makedepends="devicepkg-dev"
+source="
+	deviceinfo
+	modules-initfs
+"
+subpackages="
+	$pkgname-kernel-mainline:kernel_mainline
+	$pkgname-nonfree-firmware:nonfree_firmware
+"
+
+build() {
+	devicepkg_build $startdir $pkgname
+}
+
+package() {
+	devicepkg_package $startdir $pkgname
+}
+
+kernel_mainline() {
+	pkgdesc="Close to mainline kernel, plenty of working features and fixes"
+	depends="linux-nubia-msm8998 soc-qcom-msm8998"
+	devicepkg_subpackage_kernel $startdir $pkgname $subpkgname
+}
+
+nonfree_firmware() {
+	pkgdesc="Firmware for GPU, Wi-Fi, Bluetooth etc. (also needed for full disk encryption)"
+	depends="firmware-nubia-msm8998"
+	mkdir "$subpkgdir"
+}
+
+sha512sums="
+f83fbecf08aad238c41579fe2661b7a93c6cb9ac14a80695df8ac7726177ab53e079b2685cf38f6c37bab0a6668bd7b6dc960deee94663be5eb5e6a05e2323c0  deviceinfo
+e70bae17df23dcaaaea0e2d3616556f04baa23f8ee1357785c0f539bf97282d8ddff53953e155b72689bb73beb38c2da3d08de2a61e866684edfa10a6593885d  modules-initfs
+"
