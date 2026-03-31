@@ -3,7 +3,7 @@ pkgname=firmware-nubia-msm8998
 pkgver=1
 pkgrel=0
 _commit="e47b62e8b6d6af922e306b3a839c4c3634267cde"
-pkgdesc="Firmware for Nubia msm8998"
+pkgdesc="Firmware for Nubia Z17s"
 url="https://github.com/msm8998-mainline/firmware-nubia-msm8998"
 arch="aarch64"
 depends="soc-qcom-msm8998-nonfree-firmware"
@@ -11,9 +11,11 @@ license="proprietary"
 options="!check !archcheck !strip !tracedeps"
 source="
 	$pkgname-$_commit.tar.gz::$url/archive/$_commit.tar.gz
+	30-gpu-firmware.files
 	firmware.files
 "
 subpackages="
+	$pkgname-initramfs:firmware_initramfs
 	$pkgname-openrc
 	"
 builddir="$srcdir/$pkgname-$_commit"
@@ -22,6 +24,13 @@ package() {
 	while IFS="" read -r fw; do
 		install -Dm644 "$fw" "$pkgdir/$fw"
 	done < "$srcdir"/firmware.files
+}
+
+firmware_initramfs() {
+	pkgdesc="Files to be included in the initramfs to support osk-sdl"
+
+	install -Dm644 "$srcdir"/30-gpu-firmware.files \
+		"$subpkgdir"/usr/share/mkinitfs/files/30-gpu-firmware.files
 }
 
 openrc() {
@@ -33,5 +42,6 @@ openrc() {
 
 sha512sums="
 0b5007cee7c9a8a162558cdf539c048d3ac432b1bef511a2bf1bfd65e2c52977b13d1453bc1a4485d09ee3c54eaf489dd81fa11254f9068e35d62e0699e72c5f  firmware-nubia-msm8998-e47b62e8b6d6af922e306b3a839c4c3634267cde.tar.gz
+3238e541dbf6e3cdb072c9b62972de4250ae1a16d3f41bf321551d9c434caff9ebac1aff240ba023671b120c879d319bdfb89b491c7ef52efb3971ce1d8c4a49  30-gpu-firmware.files
 665f46039649cdd6b37ad881c4db744317e8d8c66a83820004067f4b4b1e015e59b234b182f91be3fea6cd497f880a3d81513e8220131b7e975cf13e923313b6  firmware.files
 "
