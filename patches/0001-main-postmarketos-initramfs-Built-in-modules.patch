@@ -1,4 +1,4 @@
-From 1509aa16e73be9f364325a216a6d7dd28cb9f614 Mon Sep 17 00:00:00 2001
+From c8260f4b901d636800c2eb09c96a15e0db7bf864 Mon Sep 17 00:00:00 2001
 From: Giovanni Ricca <giovanniricca@proton.me>
 Date: Mon, 24 Nov 2025 17:20:59 +0100
 Subject: [PATCH 1/2] main/postmarketos-initramfs: Built-in modules
@@ -6,22 +6,23 @@ Subject: [PATCH 1/2] main/postmarketos-initramfs: Built-in modules
 Change-Id: Ib95b92b5751b884e5373bf7436764782124413b8
 Signed-off-by: Giovanni Ricca <giovanniricca@proton.me>
 ---
- main/postmarketos-initramfs/APKBUILD | 6 ------
- 1 file changed, 6 deletions(-)
+ main/postmarketos-initramfs/APKBUILD | 12 ------------
+ 1 file changed, 12 deletions(-)
 
 diff --git a/main/postmarketos-initramfs/APKBUILD b/main/postmarketos-initramfs/APKBUILD
-index 61d6d1ca5a..d7c2a37f26 100644
+index 4ff2ae804b..11fa35ca6d 100644
 --- a/main/postmarketos-initramfs/APKBUILD
 +++ b/main/postmarketos-initramfs/APKBUILD
-@@ -42,7 +42,6 @@ makedepends="
+@@ -44,8 +44,6 @@ makedepends="
  	postmarketos-base-nofde
  "
  source="
 -	00-default.modules
+-	00-default-extra.modules
  	00-initramfs-base.dirs
  	00-initramfs-base.files
  	00-initramfs-extra-base.files
-@@ -88,10 +87,6 @@ package() {
+@@ -91,14 +89,6 @@ package() {
  		-t "$pkgdir"/usr/share/mkinitfs/dirs/
  	mkdir -p "$pkgdir"/etc/mkinitfs/dirs
  
@@ -29,17 +30,22 @@ index 61d6d1ca5a..d7c2a37f26 100644
 -		-t "$pkgdir"/usr/share/mkinitfs/modules/
 -	mkdir -p "$pkgdir"/etc/mkinitfs/modules
 -
+-	install -Dm644 "$srcdir"/00-default-extra.modules \
+-		-t "$pkgdir"/usr/share/mkinitfs/modules-extra/
+-	mkdir -p "$pkgdir"/etc/mkinitfs/modules-extra
+-
  	install -Dm644 "$srcdir"/00-initramfs-base.files \
  		-t "$pkgdir"/usr/share/mkinitfs/files/
  	mkdir -p "$pkgdir"/etc/mkinitfs/files
-@@ -107,7 +102,6 @@ package() {
+@@ -114,8 +104,6 @@ package() {
  }
  
  sha512sums="
--4f32746781d6c73c3e97def5ad127633827ce0e4cf87824b212b58d897e21cfefb391f6cdffcf4b40378c488c64a6b8559973996bba8a9cbb6a1e5db9ba33c80  00-default.modules
+-22cdd663c8d153781284511140b7c994cd60f0231a2819dafa67f5a11e2963ac6e392e8f7a9e3b75e7fe5d6d7b0b5e262e1ff1a695637354a124560a5ec3ed8d  00-default.modules
+-ace852ba267b3408998970df6042603c8bec1d033066d1c30ed65f1be955fee8644b57882898f10228ec43b912f8f03718b34ddd741b431e5a5c2e76f060a494  00-default-extra.modules
  9c0e8f6f61d5da191e03a1aa9d5d0ceb5baf1eae6dbb9bfb0af59817783525119ac8394b135f303f7b6434a3eab0b49185fb90379e06823db847a4999c75ce33  00-initramfs-base.dirs
- e268094cbd25e063fdab2226f8cf93885bd8b90455991a53296231a3401a03669440333025ca44b2a8459df98787a5725f7b227ccb9750f8fcad17ef58ba21a1  00-initramfs-base.files
- d0f35562365756d93066ce45924d17fb347b54095179c3262daa2f073e12743505cd5d9372ad30485915ca754d95a8edba9a74314e7949e0b3cf6978a87d03a5  00-initramfs-extra-base.files
+ 26e391a2c45e4317549153630d7398f01cf374d9a95e2587f0f7153017c50b6640950af60eab3b3fcadef2e8826295445ac1f45567716d3bd5d12e9c87df599b  00-initramfs-base.files
+ cc4db00caba184ad78062505415b3dadb8a32a94fe8484e4860bb6e63cd8700c8450066ce1242c496d9f063234bbab0fa40668f9c5112f3baeee30c5d405a1eb  00-initramfs-extra-base.files
 -- 
-2.52.0
+2.53.0
 

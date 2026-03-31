@@ -1,4 +1,4 @@
-From 5af8c31444aaa36223cc9662d9968a4c1879baf4 Mon Sep 17 00:00:00 2001
+From 6b88db6e422417c389362de18a41dc5f615293df Mon Sep 17 00:00:00 2001
 From: Giovanni Ricca <giovanniricca@proton.me>
 Date: Mon, 24 Nov 2025 17:22:02 +0100
 Subject: [PATCH 2/2] device-nubia-nx595j: Add symlinks
@@ -16,28 +16,28 @@ Signed-off-by: Giovanni Ricca <giovanniricca@proton.me>
 
 diff --git a/device/testing/device-nubia-nx595j b/device/testing/device-nubia-nx595j
 new file mode 120000
-index 0000000000..c1dfbea529
+index 0000000000..aff99e759c
 --- /dev/null
 +++ b/device/testing/device-nubia-nx595j
 @@ -0,0 +1 @@
-+/media/samsung_ssd/pmos/nx595j/pmaports_nubia_msm8998/device-nubia-nx595j/
++/media/samsung_ssd/pmos/msm8998-mainline/pmaports_nubia_msm8998/device-nubia-nx595j/
 \ No newline at end of file
 diff --git a/device/testing/firmware-nubia-msm8998 b/device/testing/firmware-nubia-msm8998
 new file mode 120000
-index 0000000000..bd766ba93f
+index 0000000000..09f31010da
 --- /dev/null
 +++ b/device/testing/firmware-nubia-msm8998
 @@ -0,0 +1 @@
-+/media/samsung_ssd/pmos/nx595j/pmaports_nubia_msm8998/firmware-nubia-msm8998/
++/media/samsung_ssd/pmos/msm8998-mainline/pmaports_nubia_msm8998/firmware-nubia-msm8998/
 \ No newline at end of file
 diff --git a/device/testing/linux-nubia-msm8998 b/device/testing/linux-nubia-msm8998
 new file mode 120000
-index 0000000000..f03a13714c
+index 0000000000..a75f90ff0e
 --- /dev/null
 +++ b/device/testing/linux-nubia-msm8998
 @@ -0,0 +1 @@
-+/media/samsung_ssd/pmos/nx595j/pmaports_nubia_msm8998/linux-nubia-msm8998/
++/media/samsung_ssd/pmos/msm8998-mainline/pmaports_nubia_msm8998/linux-nubia-msm8998/
 \ No newline at end of file
 -- 
-2.52.0
+2.53.0
 
